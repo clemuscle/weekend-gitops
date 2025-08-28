@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: demo }
+  template:
+    metadata:
+      labels: { app: demo }
+    spec:
+      containers:
+        - name: app
+          image: 924036758959.dkr.ecr.eu-west-3.amazonaws.com/demo-app:latest
+          ports:
+            - containerPort: 8080
