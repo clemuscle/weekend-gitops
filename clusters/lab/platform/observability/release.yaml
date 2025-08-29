@@ -9,11 +9,27 @@ spec:
       version: ">=61.0.0"
       sourceRef: { kind: HelmRepository, name: prometheus-community, namespace: flux-system }
   values:
-    prometheus:
-      service:
-        type: NodePort
-        nodePort: 30090
     grafana:
-      service:
-        type: NodePort
-        nodePort: 30030
+      resources:
+        requests: { cpu: 50m, memory: 100Mi }
+        limits:   { memory: 200Mi }
+
+    # Prometheus très resserré
+    prometheus:
+      prometheusSpec:
+        retention: 6h           # rétention courte
+        scrapeInterval: 60s     # moins d'échantillons
+        walCompression: true
+        resources:
+          requests: { cpu: 100m, memory: 250Mi }
+          limits:   { memory: 500Mi }
+
+    # Kube-state-metrics plus petit
+    kube-state-metrics:
+      resources:
+        requests: { cpu: 25m, memory: 50Mi }
+        limits:   { memory: 100Mi }
+
+    # Node exporter (tu peux le couper si besoin)
+    prometheus-node-exporter:
+      enabled: true

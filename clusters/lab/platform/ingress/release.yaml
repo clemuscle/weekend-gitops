@@ -14,6 +14,8 @@ spec:
       sourceRef: { kind: HelmRepository, name: ingress-nginx, namespace: flux-system }
   values:
     controller:
-      service:
-        type: NodePort
-        nodePorts: { http: 30080, https: 30443 }
+      hostPort:
+        enabled: true
+        ports:
+          http: 80
+          https: 443
