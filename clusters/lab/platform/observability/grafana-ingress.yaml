@@ -12,4 +12,4 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              service: { name: kube-prom-stack-grafana, port: { number: 3000 } }
+              service: { name: kube-prom-stack-grafana, port: { number: 80 } }
