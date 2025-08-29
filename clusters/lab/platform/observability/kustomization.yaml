@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
   - helmrepo.yaml
   - release.yaml
+  - grafana-ingress.yaml
+  - prometheus-ingress.yaml
