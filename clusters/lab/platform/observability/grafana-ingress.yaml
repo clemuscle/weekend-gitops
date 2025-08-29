@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana
+  namespace: flux-system    # adapte si différent
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: grafana.<PUBLIC_IP>.nip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service: { name: kube-prom-stack-grafana, port: { number: 3000 } }

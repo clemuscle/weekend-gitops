@@ -3,9 +3,8 @@ kind: Service
 metadata:
   name: demo
 spec:
-  type: NodePort
+  type: ClusterIP
   selector: { app: demo }
   ports:
     - port: 80
       targetPort: 8080
-      nodePort: 30080   # ouvert au SG
